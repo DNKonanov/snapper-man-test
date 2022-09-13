@@ -1,17 +1,17 @@
 Usercases
 =========
 
-*Helicobacter pylori* J99 total methylome analysis
+*Helicobacter pylori* A45 total methylome analysis
 --------------------------------------------------
 
-In this exmpale, we will use Snapper for the total methylaome analysis of *Helicobacter pylori* J99 strain.
+In this exmpale, we will use Snapper for the total methylaome analysis of *Helicobacter pylori* A45 strain.
 
 The running command::
 
-    (snapper) $ snapper -sample_fast5dir J99_multi -control_fast5dir J99_wga_multi -reference assembly_J99.fna -threads 16 -target_chr contig_1_pilon_pilon_pilon -max_motifs 30 -outdir Results_J99  
+    (snapper) $ snapper -sample_fast5dir A45_multi -control_fast5dir A45_wga_multi -reference assembly_A45.fna -threads 16 -target_chr NZ_CP053256.1 -max_motifs 30 -outdir Results_A45  
 
 Here we set ``-max_motifs`` parameter to be 30 since *H. pylori* is known to have a huge number of different R-M systems (up to 30).
-In addition, we specified ``-target_chr`` parameter and passed the name of the main chromosome, because in this specific case the coverege of the *H. pylori* plasmid was not sufficient for analysis.
+In addition, we specified ``-target_chr`` parameter to analyze only the main chromosome.
 
 The first stage of the pipeline is raw signals collecting. It might up to one hour depending on the dataset size. 
 On average, a dataset consisting of 40-50 multifast5 batches is processed not longer than in 15-20 minutes.
@@ -33,6 +33,11 @@ On average, a dataset consisting of 40-50 multifast5 batches is processed not lo
 Next, the algorithm performs the Kolmogorov-Smirnov test to compare signal distributions for each 11-mer presented in the reference genome.
 
 .. code:: console
+    Forward strand signals processing...
+    Getting difsignals...
+    NZ_CP053256.1: 578090 out of 912990...
+    ...
+
 
 Since all 11-mers that have significant signal shift have been extracted, they are written to the ``passed_motifs_{}.fasta`` file.
 
@@ -41,71 +46,58 @@ For each motif, the algorithm checks if this motif should be merged with some of
 in the console output.
 
 When the algorithm extracts the desired number of motifs (in our case it equals 30) or reaches the limit of confidence level (in our case we used the default value equals 1000)
-, it stops, and all the extracted motifs are written to the ``final_motifs_{}.fasta`` file. You can see the file that we obtained for *H. pylori* J99 below.
+, it stops, and all the extracted motifs are written to the ``final_motifs_{}.fasta`` file. You can see the file that we obtained for *H. pylori* A45 below.
 
 .. code:: console
 
-    >MOTIF_1 conflevel=27103.812619615586
+    >MOTIF_1 conflevel=28467.90477575676
     NCATGN
-    >MOTIF_2 conflevel=25271.120741238476
+    >MOTIF_2 conflevel=24296.043882758688
     NGCGCN
-    >MOTIF_3 conflevel=22858.215544862487
+    >MOTIF_3 conflevel=19729.375952752132
+    NTGCAN
+    >MOTIF_4 conflevel=15958.146988566323
+    NGAACN
+    >MOTIF_5 conflevel=15606.378760571615
     NGATCN
-    >MOTIF_4 conflevel=14881.210142625916
-    NGANTCN
-    >MOTIF_5 conflevel=13377.13156417874
-    NCCGGN
-    >MOTIF_6 conflevel=11745.492352209352
-    NGCCTAN
-    >MOTIF_7 conflevel=9668.218539259307
-    NGACAY
-    >MOTIF_8 conflevel=8898.54760338392
-    NGTCATN
-    >MOTIF_9 conflevel=8160.868203159104
-    NGAGGN
-    >MOTIF_10 conflevel=8378.43839522445
-    NACGTN
-    >MOTIF_11 conflevel=7872.51406852035
-    NCCNNGG
-    >MOTIF_12 conflevel=7070.2058154990955
+    >MOTIF_6 conflevel=13767.041758068699
+    NGGCCN
+    >MOTIF_7 conflevel=13539.697412362642
+    NCCAGN
+    >MOTIF_8 conflevel=14293.92147535083
+    NGAHTCN
+    >MOTIF_9 conflevel=13870.004827659663
+    TGCAAN
+    >MOTIF_10 conflevel=13544.634857307088
+    NCCATCN
+    >MOTIF_11 conflevel=11625.786500468377
+    TCNNGAN
+    >MOTIF_12 conflevel=10270.257862292823
+    NGGGGAN
+    >MOTIF_13 conflevel=9984.258291732831
+    NTCNGAN
+    >MOTIF_14 conflevel=9576.171399773017
     ATTAATN
-    >MOTIF_13 conflevel=5502.44744861762
-    NGGNCTAN
-    >MOTIF_14 conflevel=5544.476242630171
-    NGGWCAAN
-    >MOTIF_15 conflevel=5351.005717554389
-    NGTACN
-    >MOTIF_16 conflevel=4384.303493212003
-    NCGACGN
-    >MOTIF_17 conflevel=4242.870880053313
-    NCGTCGN
-    >MOTIF_18 conflevel=3779.062212247213
+    >MOTIF_15 conflevel=7988.647089667472
+    NGANTC
+    >MOTIF_16 conflevel=5202.175232607189
+    NGGAGAN
+    >MOTIF_17 conflevel=5764.404826357409
+    GTNNACN
+    >MOTIF_18 conflevel=3194.781954799198
     NTCGAN
-    >MOTIF_19 conflevel=3594.599766259159
-    CCTAAN
-    >MOTIF_20 conflevel=2770.1124650379484
-    GGACGAN
-    >MOTIF_21 conflevel=2656.2205060160477
-    NGTCACN
-    >MOTIF_22 conflevel=1734.1045411693126
-    NGTGACN
-    >MOTIF_23 conflevel=1718.0747564787976
-    GTCNATN
-    >MOTIF_24 conflevel=1543.467066776315
-    NTACCG
-    >MOTIF_25 conflevel=1551.2644823054413
-    CGTCGTN
-    >MOTIF_26 conflevel=1433.3165247859145
-    NTGCCG
-
-The authors recommend to check the motif correctness mannually in cases when its confidence level lower than 3000.
 
 
+The authors recommend to check the motif correctness mannually in cases when its confidence level lower than 3000. In this particular case, all the extracted motifs had a sufficient confidence level,
+so, they can be used as is. 
 
 *Helicobacter pylori* A45 native vs mutant analysis
 ---------------------------------------------------
 
-In this example, we will use Snapper for the analysis of *H. pylori* A45 mutant knocked-out on a gene encoding a methyltransferase with unknown specificity.
+In the previous example, we generated a list of potential *H.pylori* A45 methylation sites, and few of them has not been described earlier (such as CCAG, GAAC and GGRGA).
+
+In this example, we will use Snapper for the analysis of *H. pylori* A45 mutant knocked-out on a gene encoding a methyltransferase with unknown specificity in order to confirm the 
+a new MTase with experimentally.
 So, in contrast with previous case, we expect to see only one motif that has a significant signal shift in comaprison with thw ild type.
 
 The running command::
