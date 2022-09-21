@@ -4,7 +4,7 @@ Usercases
 *Helicobacter pylori* A45 total methylome analysis
 --------------------------------------------------
 
-In this exmpale, we will use Snapper for the total methylaome analysis of *Helicobacter pylori* A45 strain.
+In this example, we will use Snapper for the total methylaome analysis of *Helicobacter pylori* A45 strain.
 
 The running command::
 
@@ -151,7 +151,7 @@ so, the statistics values tend to be lower too. Generally, the author recommend 
 In the previous example, we generated a list of potential H.pylori A45 methylation sites, and few of them has not been described earlier (such as CCAG, GAAC and GGRGA).
 
 In this example, we will use Snapper for the analysis of H. pylori A45 mutant knocked-out on a gene encoding a methyltransferase with unknown specificity 
-in order to confirm the a new MTase with experimentally. So, in contrast to the previous case, we expect to see only one motif that has a significant signal shift in comparison with the wild type.
+in order to confirm a new MTase experimentally. So, in contrast to the previous case, we expect to see only one motif that has a significant signal shift in comparison with the wild type.
 
 The running command::
 
@@ -176,14 +176,27 @@ Since the algorithm implemented in Snapper is very high-sensitive, these results
 .. image:: images/bc13_NNNCTTCHNNN.png
 
 Indeed, the CCAG motif has a visible signal shift, while the others have a very small difference between native and contol samples. 
-Moreover, these two motifs cannot be merged into one “ancestor” motif. Combining it with small effect size and low confidince level, we can conclude that these motifs are “waste”.
+Moreover, these two motifs cannot be merged into one “ancestor” motif. Combining it with small effect size and low confidince level, we can conclude that these motifs are false-positive.
 
 
 When motifs with low confidence level are not false-positive?
 -------------------------------------------------------------
 
-Let's consider other case opposite to the previous. Here, we will analyze another H. pylori strain J99. The Snapper resulting file had the following motifs with low confidence level::
+Let's consider other case opposite to the previous. Here, we will analyze another *H. pylori* strain J99. The Snapper resulting file had the following motifs with low confidence level::
 
+    ...
+    >MOTIF_5 conflevel=13377.13156417874
+    NCCGGN
+    ...
+    >MOTIF_13 conflevel=5502.44744861762
+    NGGNCTAN
+    >MOTIF_14 conflevel=5544.476242630171
+    NGGWCAAN
+    ...
+    >MOTIF_16 conflevel=4384.303493212003
+    NCGACGN
+    >MOTIF_17 conflevel=4242.870880053313
+    NCGTCGN
     ...
     >MOTIF_20 conflevel=2770.1124650379484
     GGACGAN
@@ -200,8 +213,8 @@ Let's consider other case opposite to the previous. Here, we will analyze anothe
 
 
 Firstly, we can remove from this list GTCNATN because it did not show a visible signal shift on the plot. 
-Secondly, CGTCGTN should be removed since it is just a submotif of NCGWCGN that had a confidience score greater than 3000. 
-Now, let's consider signal distributions for the rest motifs:
+Secondly, CGTCGTN should be removed since it is just a submotif of NCGWCGN that had a confidence score greater than 3000 (NCGACGN and NCGTCGN motifs in the list above). 
+Now, let's consider signal distributions for other motifs:
 
 .. image:: images/plots_forward_contig_1_pilon_pilon_pilon/GGACGANNNNN.png
 
@@ -212,11 +225,11 @@ Now, let's consider signal distributions for the rest motifs:
 .. image:: images/plots_forward_contig_1_pilon_pilon_pilon/NNNNNNTGCCG.png
 
 Firstly, we can see that both GTGAC and GTCAC motifs have a clear signal shift and can be merged into one GTSAC motif. 
-So, combining these two facts and despite the low value of confidence, we can conclude that GTSAC methylation motif is presented in this strain.
+So, combining these two facts, despite the low value of confidence, we can conclude that GTSAC methylation motif is presented in this strain.
 
 The NTGCCG motif seems partially shifted but the two distributions have one identical mode. Usually, it means that the complete motif sequence has not been extracted 
 or the motif context has not been successfully adjusted due to 11-mers length limitation. Actually, in this particular case, this motif is just cropped form of CCGG motif. 
-We should note, that CCGG was extracted individually with confidence higher than 10000.
+We should note, that CCGG was extracted individually with confidence greater than 10000.
 
 The GGACGAN motif looks the most controversial. The change in the distribution shape signalizes about the presence of a methylated base in this context, 
 but we cannot be sure about motif correctness or motif completeness. The only additional thing we know is that this motif is 
