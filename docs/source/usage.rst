@@ -13,6 +13,9 @@ To use Snapper, first install it using pip::
    (snapper) $ conda install -c bioconda ont-fast5-api ont-tombo
    (snapper) $ pip install snapper-ont
 
+We recommend to use python 3.7 because later python versions might be incompatible 
+with inner biopython dependencies.
+
 Usage
 ----------------
 
