@@ -19,7 +19,7 @@ with inner biopython dependencies.
 Usage
 ----------------
 
-The Snapper pipline is designed to perform only comparative analysis 
+The Snapper pipeline is designed to perform only comparative analysis 
 and requires two samples to be sequenced. In most cases, these samples are native DNA and control DNA obtained after whole-genome amplification (WGA), 
 but in general it is not a constrain. Thus, the algorithm might be used to compare two native DNA dataset, where the first has been extracted from some wild type bacteria, 
 and the second from a mutant. Such an example is considered in details in the :doc:`usercases` section.
@@ -50,24 +50,24 @@ Optional parameters:
    but the authors recommend to tune this parameter only in cases when the coverege of either native or control sample is less than 20 per position,
    since the algorithm performs inner k-mers coverage balancing while computing statistcs values.
 * :code:`-outdir`       
-   Output directory name. By default, the output directory is named :code:`Results_yyyy_mm_dd_tttttt` according to the run datatime, for example :code:`Results_2022_09_02_180002`.
+   Output directory name. By default, the output directory is named :code:`Results_yyyy_mm_dd_tttttt` according to the run data and time, for example :code:`Results_2022_09_02_180002`.
 * :code:`-n_batches`    
    Number of parsed fast5 batches. The default value equals the number of multifast5 files passed to the algorithm, but not greater than 100. 
 * :code:`-threads`      
-   Number of threads used (derfault is 8)
+   Number of threads used (default is 8)
 * :code:`-max_motifs`   
    The maximum expected number of motifs that the algorithm will try to extract. The resulting number of motifs might be lower.
 * :code:`-min_conf`     
    The minimal confidence (chi-square statistics) value. Default is 1000.
 * :code:`-target_chr`   
-   Target chromosome name. By default, all sequences avilable in the input reference fasta file are processed independentaly.
+   Target chromosome name. By default, all sequences available in the input reference fasta file are processed independently.
 
 
 Output files explanation
 ------------------------
 
-For each contig and for each strand, the analysis is performed independently, so, in the output folder you can see a few resulting files for each contig+strand variant.
-Let's consider forward strand of ``contig_1`` contig. The following files have been generated for this particular combination:
+For each contig and each strand, the analysis is performed independently, so, in the output folder you can see a few resulting files for each contig+strand variant.
+Let's consider forward strand of ``contig_1`` contig. The following files are generated for this particular combination:
 
 * ``passed_motifs_forward_contig_1.fasta``
    This file contains all 11-mers that have a significant signal shift between the native and control samples.
