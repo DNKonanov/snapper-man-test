@@ -75,7 +75,7 @@ Let's consider forward strand of ``contig_1`` contig. The following files are ge
    This file contains a sorted list of all potential methylation motifs extracted by a greedy algorithm implemented in Snapper. For each extracted motif, the confidence value is given in the header.
    For motifs with confidence level lower than 3000, the author recommend to check their correctness manually (see :doc:`usercases`)
 * ``seq_iter/forward_contig_1/`` folder 
-   In this folder the greedy algorithm saves sets of unexplained 11-mer sequences on each greedy interation. Formally, the ``seqs_iter_1.fasta`` is identical to ``passed_motifs_forward_contig_1.,fasta`` since 
+   In this folder the greedy algorithm saves sets of unexplained 11-mer sequences on each greedy interation. Formally, ``seqs_iter_1.fasta`` is identical to ``passed_motifs_forward_contig_1.fasta`` since 
    the all passed 11-mers are unexplained on the first iteration.
 * ``plots_forward_contig_1``
    This folder contains signal distribution plots for each extracted methylation motif.

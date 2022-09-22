@@ -139,18 +139,18 @@ In addition to text output, Snapper generates signal distribution plots for each
 .. image:: images/A45_ATTAATNNNNN.png
 
 
-Here, we can see few typical types of signal distribution. The first CATG motif distribution has a clear unimodal shape and visible signal shift, 
+Here, we can see few types of signal distribution. The first CATG motif distribution has a clear unimodal shape and visible signal shift, 
 while the second motif TGCA has two modes. Note, that shift size can differ for different modes. The last plot demonstrates longer ATTAAT methylation site. 
-Here, despite a high effect size, the confidence level is quite low. The reason is a formal length of the motif since longer motifs are just rarer than shorter ones, 
-so, the statistics values tend to be lower too. Generally, the author recommend to be cautios with motifs that have confidince level lower than 3000 regardless of the motif length.
+Here, despite a high effect size, the confidence level is quite low. The reason is a formal length of the motif since longer motifs are generally rarer than shorter ones, 
+so, the statistics values tend to be lower too. Generally, the authors recommend to be cautios with motifs that have confidince level lower than 3000 regardless of the motif length.
 
 
 *Helicobacter pylori* A45 native vs mutant analysis
 ---------------------------------------------------
 
-In the previous example, we generated a list of potential H.pylori A45 methylation sites, and few of them has not been described earlier (such as CCAG, GAAC and GGRGA).
+In the previous example, we inferred a list of potential *H.pylori* A45 methylation sites, and few of them has not been described earlier (such as CCAG, GAAC and GGRGA).
 
-In this example, we will use Snapper for the analysis of H. pylori A45 mutant knocked-out on a gene encoding a methyltransferase with unknown specificity 
+In this example, we will use Snapper for the analysis of *H. pylori* A45 mutant disrupted in a gene encoding a methyltransferase with unknown specificity 
 in order to confirm a new MTase experimentally. So, in contrast to the previous case, we expect to see only one motif that has a significant signal shift in comparison with the wild type.
 
 The running command::
@@ -166,7 +166,7 @@ Unexpectedily, the resulting list of motifs includes three motifs::
     >MOTIF_4 conflevel=1226.8986302620608
     NCTTCH
 
-According to these results, the new MTase is most likely specific to CCAG site, but there are two motifs with confidence level lower than 3000 were extracted. 
+According to these results, the considered MTase is most likely specific to CCAG site, but there are two motifs with confidence level lower than 3000 were extracted. 
 Since the algorithm implemented in Snapper is very high-sensitive, these results seem to be false-positive. Let's consider corresponding signal distributions in order to confirm our inference:
 
 .. image:: images/bc13_NNNCCAGNNNN.png
