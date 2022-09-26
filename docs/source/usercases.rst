@@ -13,7 +13,7 @@ The running command::
 Here we set ``-max_motifs`` parameter to be 30 since *H. pylori* is known to have a huge number of different R-M systems (up to 30).
 In addition, we specified ``-target_chr`` parameter to analyze only the main chromosome.
 
-The first stage of the pipeline is raw signals collecting. It might up to one hour depending on the dataset size. 
+The first stage of the pipeline is raw signals collecting. It might take up to one hour depending on the dataset size. 
 On average, a dataset consisting of 40-50 multifast5 batches is processed not longer than in 15-20 minutes.
 
 .. code:: console

@@ -32,8 +32,8 @@ Firstly, the fast5 files should be resquiggled using `Tombo <https://nanoporetec
 
    (snapper) tombo resquiggle fast5_native reference.fna
    (snapper) tombo resquiggle fast5_wga reference.fna
-   (snapper) single_to_mullti_fast5 -i fast5_native -s fast5_multi_native
-   (snapper) single_to_mullti_fast5 -i fast5_wga -s fast5_multi_wga
+   (snapper) single_to_multi_fast5 -i fast5_native -s fast5_multi_native
+   (snapper) single_to_multi_fast5 -i fast5_wga -s fast5_multi_wga
 
 
 Before the resquiggling command, ensure that basecalling data have been added to the fast5 files (see `tombo preprocess annotate_raw_with_fastqs <https://nanoporetech.github.io/tombo/resquiggle.html>`_ command).
