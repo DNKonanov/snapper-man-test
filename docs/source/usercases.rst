@@ -182,7 +182,7 @@ Moreover, these two motifs cannot be merged into one “ancestor” motif. Combi
 When motifs with low confidence level are not false-positive?
 -------------------------------------------------------------
 
-Let's consider other case opposite to the previous. Here, we will analyze another *H. pylori* strain J99. The Snapper resulting file had the following motifs with low confidence level::
+Let's consider other case opposite to the previous. Here, we will analyze another *H. pylori* strain J99. Snapper returned the following motifs::
 
     ...
     >MOTIF_5 conflevel=13377.13156417874
