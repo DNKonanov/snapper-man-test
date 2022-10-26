@@ -84,66 +84,69 @@ in the console output::
         ...
 
 
-
 When the algorithm extracts the desired number of motifs (in our case it equals 30) or reaches the limit of confidence level (in our case we used the default value equals 1000), 
-it stops, and all the extracted motifs are written to the ``final_motifs_{}.fasta`` file. You can see the file that we obtained for *H. pylori* A45 below.
+it stops. The results includes the generated list of potential methylation sites, where for each motif a corresponding confidence level and signal shift size are calculated. 
+The table below shows the results returned by Snapper for *H. pylori* A45.
 
-.. code:: console
++-------+-----------+---------+
+| MOTIF | conflevel | effsize |
++=======+===========+=========+
+|NCATGN | 32951.2   | 1.59    |
++-------+-----------+---------+
+|NGCGCN |32109.6    | 1.11    |
++-------+-----------+---------+
+|NTGCAN | 19535.3   |   1.00  |
++-------+-----------+---------+
+|NGAACN | 21296.2   |0.79     |
++-------+-----------+---------+
+|NGGCCN |22838.8    | 1.42    |
++-------+-----------+---------+
+|NGATCN | 24323.8   | 0.46    |
++-------+-----------+---------+
+|NCCAGN | 22631.8   |0.72     |
++-------+-----------+---------+
+|NCCATCN|29952.0    |1.54     |
++-------+-----------+---------+
+|NGAHTCN|25034.2    |0.72     |
++-------+-----------+---------+
+|NGGGGAN|14548.9    |0.58     |
++-------+-----------+---------+
+|ATTAATN|16256.6    |1.26     |
++-------+-----------+---------+
+|TCNNGAN|16322.6    |0.63     |
++-------+-----------+---------+
+|NTCNGAN|18074.7    | 0.63    |
++-------+-----------+---------+
+|NGANTC | 11994.4   |0.37     |
++-------+-----------+---------+
+|NGGAGAN|11128.4    | 0.60    |
++-------+-----------+---------+
+|GTNNACN|9591.0     | 0.92    |
++-------+-----------+---------+
+|NTCGAN |4558.2     |0.62     |
++-------+-----------+---------+
+|CNNGAN | 3066.5    | 0.27    |
++-------+-----------+---------+
 
-    >MOTIF_1 conflevel=32929.810579835554
-    NCATGN
-    >MOTIF_2 conflevel=27150.172723009397
-    NGCGCN
-    >MOTIF_3 conflevel=20926.64815874996
-    NTGCAN
-    >MOTIF_4 conflevel=16871.401882032533
-    NGAACN
-    >MOTIF_5 conflevel=15530.496289015375
-    NGGCCN
-    >MOTIF_6 conflevel=13946.47111908573
-    NGATCN
-    >MOTIF_7 conflevel=14357.456320775802
-    NCCAGN
-    >MOTIF_8 conflevel=13564.339781476972
-    TGCAAN
-    >MOTIF_9 conflevel=13897.42649049243
-    NCCATCN
-    >MOTIF_10 conflevel=13516.073689850868
-    NGANTCN
-    >MOTIF_11 conflevel=11834.003594825455
-    TCNNGAN
-    >MOTIF_12 conflevel=10879.027264923401
-    ATTAATN
-    >MOTIF_13 conflevel=11125.493295859182
-    NGGGGAN
-    >MOTIF_14 conflevel=10321.761783741122
-    NTCNGAN
-    >MOTIF_15 conflevel=6055.761315478015
-    NGGAGAN
-    >MOTIF_16 conflevel=5151.606515517744
-    GTNNACN
-    >MOTIF_17 conflevel=3797.0776895320637
-    NTCGAN
+Generally, motifs with confidence level higher than 5000 might be used without additional verification regardless effect size. Thus, the NGATCN motif (actually just GTAC) has a moderate 
+signal shift (effsize < 0.5) but extremely high confidence level that indicates about motif correctness. In contrast, the NTCGAN motif has quite low confidence level but high effect size greater than 0.5, 
+that seems satisfactory for motif inference. The last extracted motif CNNGAN has the lowest confidence and effect size. To ensure the motif correctness we should consider corresponding signal distribution plots.
 
 
-The authors recommend to check the motif correctness mannually in cases when its confidence level lower than 3000. 
-In this particular case, all the extracted motifs had a sufficient confidence level, so, they can be used as is.
+.. image:: images/A45_CNNGANNNNNN.png
 
-
-In addition to text output, Snapper generates signal distribution plots for each extracted motif. These plots can be found in ``plots_[forward, reverse]_[contigname]`` folders. Let's observe some signal distributions:
+We can see that signal distributions are quite similar and contain a few common modes. Let's compare this plot with actual *H. pylori* methylation sites:
 
 .. image:: images/A45_NNNCATGNNNN.png
 
-.. image:: images/A45_NNNTGCANNNN.png
+.. image:: images/A45_NNNNNGAACNN.png
 
 .. image:: images/A45_ATTAATNNNNN.png
 
+Indeed, the effect size should be noticeable for actual individual methylation sites, so we can conclude that CNNGA is not an individual motif. Actually, it is just a submotif for the TCNNGA motif.
 
-Here, we can see few types of signal distribution. The first CATG motif distribution has a clear unimodal shape and visible signal shift, 
-while the second motif TGCA has two modes. Note, that shift size can differ for different modes. The last plot demonstrates longer ATTAAT methylation site. 
-Here, despite a high effect size, the confidence level is quite low. The reason is a formal length of the motif since longer motifs are generally rarer than shorter ones, 
-so, the statistics values tend to be lower too. Generally, the authors recommend to be cautios with motifs that have confidince level lower than 3000 regardless of the motif length.
-
+We should mention that Snapper is intentionally does not merge close motifs such as GGGGA and GGAGA to prevent occasional motif collisions, so the user should to merge these variants by themselves.
+Combining the Snapper results, we can infer the following list of methylation sites: ATTAAT, GTNNAC, GGRGA, CCATC, CATG, CCAG, GCGC, GANTC, GATC, GGCC, GAAC, TGCA, TCGA, TCNGA, TCNNGA. 
 
 *Helicobacter pylori* A45 native vs mutant analysis
 ---------------------------------------------------
@@ -157,81 +160,113 @@ The running command::
 
     (snapper) $ snapper -sample_fast5dir A45_multi -control_fast5dir A45_newmut_multi -reference A45.fna -outdir Results_A45_newmut 
 
-Unexpectedily, the resulting list of motifs includes three motifs::
+Unexpectedily, the resulting list of motifs includes two motifs:
 
-    >MOTIF_1 conflevel=69232.936179688
-    NCCAGN
-    >MOTIF_2 conflevel=1833.4410392715497
-    NTCTTN
-    >MOTIF_4 conflevel=1226.8986302620608
-    NCTTCH
++-------+-----------+---------+
+| MOTIF | conflevel | effsize |
++=======+===========+=========+
+|NCAGGN | 83270.4   | 0.70    |
++-------+-----------+---------+
+|NTCTN  | 3174.7    | 0.32    |
++-------+-----------+---------+
 
 According to these results, the considered MTase is most likely specific to CCAG site, but there are two motifs with confidence level lower than 3000 were extracted. 
 Since the algorithm implemented in Snapper is very high-sensitive, these results seem to be false-positive. Let's consider corresponding signal distributions in order to confirm our inference:
 
 .. image:: images/bc13_NNNCCAGNNNN.png
     
-.. image:: images/bc13_NNNNTCTTNNN.png
-    
-.. image:: images/bc13_NNNCTTCHNNN.png
+.. image:: images/bc13_NNNNTCTNNNN.png
 
-Indeed, the CCAG motif has a visible signal shift, while the others have a very small difference between native and contol samples. 
-Moreover, these two motifs cannot be merged into one “ancestor” motif. Combining it with small effect size and low confidince level, we can conclude that these motifs are false-positive.
+Indeed, the CCAG motif has a visible signal shift, so it is most likely to be the metylation site for the considered MTase. At the same time, TCT has a very small but noticeable difference between native and contol samples in both distribution modes.
+Probably, TCT is part of Type I R-M system recognition site but it requires additional experimental confirmation.
 
 
 When motifs with low confidence level are not false-positive?
 -------------------------------------------------------------
 
-Let's consider other case opposite to the previous. Here, we will analyze another *H. pylori* strain J99. Snapper returned the following motifs::
+Let's consider other case opposite to the previous. Here, we will analyze another *H. pylori* strain J99. Snapper returned the following motifs:
 
-    ...
-    >MOTIF_5 conflevel=13377.13156417874
-    NCCGGN
-    ...
-    >MOTIF_13 conflevel=5502.44744861762
-    NGGNCTAN
-    >MOTIF_14 conflevel=5544.476242630171
-    NGGWCAAN
-    ...
-    >MOTIF_16 conflevel=4384.303493212003
-    NCGACGN
-    >MOTIF_17 conflevel=4242.870880053313
-    NCGTCGN
-    ...
-    >MOTIF_20 conflevel=2770.1124650379484
-    GGACGAN
-    >MOTIF_21 conflevel=2656.2205060160477
-    NGTCACN
-    >MOTIF_22 conflevel=1734.1045411693126
-    NGTGACN
-    >MOTIF_23 conflevel=1718.0747564787976
-    GTCNATN
-    >MOTIF_25 conflevel=1551.2644823054413
-    CGTCGTN
-    >MOTIF_26 conflevel=1433.3165247859145
-    NTGCCG
+ 
++-------+-----------+---------+
+| MOTIF | conflevel | effsize |
++=======+===========+=========+
+|NCATGN | 30725.1   | 1.30    |
++-------+-----------+---------+
+|NGCGCN |31789.6    | 0.85    |
++-------+-----------+---------+
+|NGATCN | 28787.6   |   0.36  |
++-------+-----------+---------+
+|NGANTCN| 18370.6   |0.4      |
++-------+-----------+---------+
+|NCCGGN |16504.4    | 0.98    |
++-------+-----------+---------+
+|NGCCTAN| 18232.3   | 1.32    |
++-------+-----------+---------+
+|NGACAY | 12090.2   |1.12     |
++-------+-----------+---------+
+|NGTCATN|12902.7    |1.33     |
++-------+-----------+---------+
+|NACGTN |10060.5    |1.07     |
++-------+-----------+---------+
+|NCCNNGG|8993.5     |0.74     |
++-------+-----------+---------+
+|NGAGGN |8984.4     |0.28     |
++-------+-----------+---------+
+|ATTAATN|10246.2    |0.96     |
++-------+-----------+---------+
+|GGWCWAN|10589.9    | 0.55    |
++-------+-----------+---------+
+|GGWCNAN| 9547.2    |0.46     |
++-------+-----------+---------+
+|NGTACN |7495.2     | 1.07    |
++-------+-----------+---------+
+|NCGACGN|6267.5     | 1.02    |
++-------+-----------+---------+
+|NCGTCGN|5088.5     |0.51     |
++-------+-----------+---------+
+|NTCGAN | 4788.8    | 0.44    |
++-------+-----------+---------+
+|CCTAAN | 4838.8    | 0.16    |
++-------+-----------+---------+
+|GGGCTAN| 4508.5    | 0.33    |
++-------+-----------+---------+
+|NGTCACN| 3847.4    | 1.11    |
++-------+-----------+---------+
+|NTNCCG | 2365.1    | 0.15    |
++-------+-----------+---------+
+|NGTGACN| 2307.4    | 0.67    |
++-------+-----------+---------+
+|GTCNATN| 2309.9    | 0.19    |
++-------+-----------+---------+
+|GACNAN | 2326.3    | 0.13    |
++-------+-----------+---------+
+|NCCNGG | 1977.4    | 0.25    |
++-------+-----------+---------+
+|GGGCNAN| 1261.5    | 0.17    |
++-------+-----------+---------+
 
+This case is quite more complicated copared with the A45 strain since there is more potential motifs with low metric values which should 
+be filtered manually. Fortunately, combining confidence level with observed effect size we can succesfully infer individual motifs.
+Firstly, we should remove from the list all motifs that have confidence level lower than 3000 and effect size lower than 0.25 (NTNCCG, GTCNATN, GACNAN, NCCNGG, GGGCNAN).
+As well as in the previous case, all motifs with confidence level greater than 5000 can be used as is regardless the effect size. NGTCACN and NGTGACN motifs has quite low 
+confidence level but a solid signal shift and form an ancestor motif GTSAC.
 
-Firstly, we can remove from this list GTCNATN because it did not show a visible signal shift on the plot. 
-Secondly, CGTCGTN should be removed since it is just a submotif of NCGWCGN that had a confidence score greater than 3000 (NCGACGN and NCGTCGN motifs in the list above). 
-Now, let's consider signal distributions for other motifs:
+NTCGAN and GGGTCAN are more controversial. They both have a moderate signal shift and confidence level, so we should manually observe corresponding signal destributions to
+verify their presence.
 
-.. image:: images/plots_forward_contig_1_pilon_pilon_pilon/GGACGANNNNN.png
-
-.. image:: images/plots_forward_contig_1_pilon_pilon_pilon/NGTCACNNNNN.png
+.. image:: images/J99_NNTCGANNNNN.png
     
-.. image:: images/plots_forward_contig_1_pilon_pilon_pilon/NNNGTGACNNN.png
+.. image:: images/J99_NNGGGCTANNN.png
 
-.. image:: images/plots_forward_contig_1_pilon_pilon_pilon/NNNNNNTGCCG.png
+Control and sample signal distributions for GGGCTA have a common mode that indicates that it is not an individual motif while TCGA has a visible signal shift, so we
+can conlude that TCGA is an individual motif.
 
-Firstly, we can see that both GTGAC and GTCAC motifs have a clear signal shift and can be merged into one GTSAC motif. 
-So, combining these two facts, despite the low value of confidence, we can conclude that GTSAC methylation motif is presented in this strain.
+Main points
+-----------
 
-The NTGCCG motif seems partially shifted but the two distributions have one identical mode. Usually, it means that the complete motif sequence has not been extracted 
-or the motif context has not been successfully adjusted due to 11-mers length limitation. Actually, in this particular case, this motif is just cropped form of CCGG motif. 
-We should note, that CCGG was extracted individually with confidence greater than 10000.
+Here, we summurize some motif inference recommendations: 
 
-The GGACGAN motif looks the most controversial. The change in the distribution shape signalizes about the presence of a methylated base in this context, 
-but we cannot be sure about motif correctness or motif completeness. The only additional thing we know is that this motif is 
-quite similar to GGNCTA and GGWCAA that had a satisfactory confidence level. Maybe they are formed by one common ancestor motif, 
-but formally, such cases can be resolved only experimentally.
+1. Generally, if the confidence level of a considered motif is greater than 5000, it is most probably an individual motif regardless signal shif size.
+2. Generally, if the signal shift (effsize) of a considered motif is greater than 0.5, it is most probably an individual motif.
+3. If some motif has a confidence level lower than 5000 and a signal shift lower than 0.5, it should be manually verified via corresponding signal distributions plots observation. If sample and control distributions have a common mode (one ore more), it usually indicates that motif sequence is incomplete.
+4. If some motif has a confidence level lower than 3000 and a signal shift lower than 0.25, it is most likely not to be an individual motif.  
