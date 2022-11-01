@@ -245,9 +245,9 @@ Let's consider other case opposite to the previous. Here, we will analyze anothe
 |GGGCNAN| 1261.5    | 0.17    |
 +-------+-----------+---------+
 
-This case is quite more complicated copared with the A45 strain since there is more potential motifs with low metric values which should 
-be filtered manually. Fortunately, combining confidence level with observed effect size we can succesfully infer individual motifs.
-Firstly, we should remove from the list all motifs that have confidence level lower than 3000 and effect size lower than 0.25 (NTNCCG, GTCNATN, GACNAN, NCCNGG, GGGCNAN).
+This case is quite more complicated compared with the previous since case there is more potential motifs with low metric values which should 
+be filtered manually. Fortunately, combining confidence level with observed effect size we can infer individual motifs.
+Firstly, we should remove from the list all motifs that have confidence level lower than 3000 AND effect size lower than 0.25 (NTNCCG, GTCNATN, GACNAN, NCCNGG, GGGCNAN).
 As well as in the previous case, all motifs with confidence level greater than 5000 can be used as is regardless the effect size. NGTCACN and NGTGACN motifs has quite low 
 confidence level but a solid signal shift and form an ancestor motif GTSAC.
 
@@ -266,7 +266,7 @@ Main points
 
 Here, we summurize some motif inference recommendations: 
 
-1. Generally, if the confidence level of a considered motif is greater than 5000, it is most probably an individual motif regardless signal shif size.
+1. Generally, if the confidence level of a considered motif is greater than 5000, it is most probably an individual motif regardless signal shift size.
 2. Generally, if the signal shift (effsize) of a considered motif is greater than 0.5, it is most probably an individual motif.
 3. If some motif has a confidence level lower than 5000 and a signal shift lower than 0.5, it should be manually verified via corresponding signal distributions plots observation. If sample and control distributions have a common mode (one ore more), it usually indicates that motif sequence is incomplete.
 4. If some motif has a confidence level lower than 3000 and a signal shift lower than 0.25, it is most likely not to be an individual motif.  
