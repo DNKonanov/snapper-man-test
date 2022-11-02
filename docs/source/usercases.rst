@@ -128,7 +128,7 @@ The table below shows the results returned by Snapper for *H. pylori* A45.
 |CNNGAN | 3066.5    | 0.27    |
 +-------+-----------+---------+
 
-Generally, motifs with confidence level higher than 5000 might be used without additional verification regardless effect size. Thus, the NGATCN motif (actually just GTAC) has a moderate 
+Generally, motifs with confidence level higher than 5000 might be used without additional verification regardless effect size. Thus, the NGATCN motif (actually just GATC) has a moderate 
 signal shift (effsize < 0.5) but extremely high confidence level that indicates about motif correctness. In contrast, the NTCGAN motif has quite low confidence level but high effect size greater than 0.5, 
 that seems satisfactory for motif inference. The last extracted motif CNNGAN has the lowest confidence and effect size. To ensure the motif correctness we should consider corresponding signal distribution plots.
 
