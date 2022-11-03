@@ -14,7 +14,7 @@ To use Snapper, first install it using pip::
    (snapper) $ pip install snapper-ont
 
 We recommend to use python 3.7 because later python versions might be incompatible 
-with inner biopython dependencies.
+with inner biopython dependencies. 
 
 Usage
 ----------------
@@ -79,3 +79,4 @@ Let's consider forward strand of ``contig_1`` contig. The following files are ge
    the all passed 11-mers are unexplained on the first iteration.
 * ``plots_forward_contig_1``
    This folder contains signal distribution plots for each extracted methylation motif.
+

@@ -10,7 +10,7 @@ Oxfrod Nanopore reads.
 
 The :doc:`usage` section contains the :ref:`installation` guide and the description of the main Snapper features.
 In the :doc:`usercases` section you can find three Snapper usage examples, including few recommendation how to
-interpret results and manually verify them.
+interpret results and manually verify them. 
 
 
 Contents

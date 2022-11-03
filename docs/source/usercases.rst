@@ -270,3 +270,12 @@ Here, we summurize some motif inference recommendations:
 2. Generally, if the signal shift (effsize) of a considered motif is greater than 0.5, it is most probably an individual motif.
 3. If some motif has a confidence level lower than 5000 and a signal shift lower than 0.5, it should be manually verified via corresponding signal distributions plots observation. If sample and control distributions have a common mode (one ore more), it usually indicates that motif sequence is incomplete.
 4. If some motif has a confidence level lower than 3000 and a signal shift lower than 0.25, it is most likely not to be an individual motif.  
+
+
+Demo-dataset
+------------
+
+The demo-dataset is available on our FTP: `http://download.ripcm.com/snapper_test/ <http://download.ripcm.com/snapper_test/>`_
+
+The demo-dataset includes multi-fast5 files for native *H. pylori* A45 strain (``control`` folder) and *hpy* mutant disrupted in the gene encoding CATG-specific methyltransferase (``mutant`` folder).
+The reference genome is available on GenBank: `GCF_000333835.2 <https://www.ncbi.nlm.nih.gov/assembly/GCF_000333835.2/>`_.
