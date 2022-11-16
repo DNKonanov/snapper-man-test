@@ -40,7 +40,7 @@ Next, the algorithm performs the Kolmogorov-Smirnov test to compare signal distr
     ...
 
 
-Since all 11-mers that have significant signal shift have been extracted, they are written to the ``passed_motifs_{}.fasta`` file.
+Just after all 11-mers that have significant signal shift have been extracted, they are written to the ``passed_motifs_{}.fasta`` file.
 
 The next stage is a greedy motif extraction. In the console output, we can see the motif variant extracted on each algorithm iteration.
 For each motif, the algorithm checks if this motif should be merged with some of the motifs found on the previous iterations, which also can bee seen 
@@ -74,9 +74,9 @@ in the console output::
     (25455.630042353463, ('N', 'C', 'A', 'T', 'G', 'N'), (3, 4, 5, 6, 7, 8))
     (25455.630042353463, ('N', 'C', 'A', 'T', 'G', 'N'), (3, 4, 5, 6, 7, 8)) already has a supermotif!
     Changed to (None, ('N', 'C', 'A', 'T', 'G', 'N'), (3, 4, 5, 6, 7, 8))
-    # here, we can see that a new extracted motif NCATGC located form 3rd to 8th position in 11mers is a duplicate,
+    # here, we can see that a new extracted motif NCATGC is a duplicate,
     # or, more generally, has a supermotif in the current motifs set. The algorithm modifies this motif according to the
-    # corresponding supermotif, extract it, and goes to the next iteration
+    # corresponding supermotif, extracts it, and goes to the next iteration
 
     ['NCATGN', 'NGCGCN']
     # here, the motifs set has not been changed
