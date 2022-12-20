@@ -85,7 +85,7 @@ in the console output::
 
 
 When the algorithm extracts the desired number of motifs (in our case it equals 30) or reaches the limit of confidence level (in our case we used the default value equals 1000), 
-it stops. The results includes the generated list of potential methylation sites, where for each motif a corresponding confidence level and signal shift size are calculated. 
+it stops. The results include the generated list of potential methylation sites, where for each motif a corresponding confidence level and signal shift size are calculated. 
 The table below shows the results returned by Snapper for *H. pylori* A45.
 
 +-------+-----------+---------+
@@ -170,7 +170,7 @@ Unexpectedily, the resulting list of motifs includes two motifs:
 |NTCTN  | 3174.7    | 0.32    |
 +-------+-----------+---------+
 
-According to these results, the considered MTase is most likely specific to CCAG site, but there are two motifs with confidence level lower than 3000 were extracted. 
+According to these results, the considered MTase is most likely specific to CCAG site, but there is one motif with confidence level lower than 3000 was extracted. 
 Since the algorithm implemented in Snapper is very high-sensitive, these results seem to be false-positive. Let's consider corresponding signal distributions in order to confirm our inference:
 
 .. image:: images/bc13_NNNCCAGNNNN.png
