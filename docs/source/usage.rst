@@ -46,17 +46,21 @@ A typical Snapper running command::
 Optional parameters:
 
 * :code:`-ks_t`         
-   The threshold value of -log(p-value) in the Kolmogorov-Smirnov test (default is 5). In general, the lower this value, the higher the algorithm sensitivity,
+   The threshold value of -log(p-value) in the Kolmogorov-Smirnov test (default is 3). In general, the lower this value, the higher the algorithm sensitivity,
    but the authors recommend to tune this parameter only in cases when the coverege of either native or control sample is less than 20 per position,
    since the algorithm performs inner k-mers coverage balancing while computing statistcs values.
 * :code:`-outdir`       
    Output directory name. By default, the output directory is named :code:`Results_yyyy_mm_dd_tttttt` according to the run data and time, for example :code:`Results_2022_09_02_180002`.
-* :code:`-n_batches`    
-   Number of parsed fast5 batches. The default value equals the number of multifast5 files passed to the algorithm, but not greater than 100. 
+* :code:`-coverege`    
+   The threshold for genome coverege (default is 40) 
 * :code:`-threads`      
    Number of threads used (default is 8)
+* :code:`-k_size`      
+   k-mer size, must be odd, should not be less than 11 (default is 15)
+* :code:`-long_k_size`      
+   long k-mer size, must be odd, should not be less than 21 (default is 29)
 * :code:`-max_motifs`   
-   The maximum expected number of motifs that the algorithm will try to extract. The resulting number of motifs might be lower.
+   The maximum expected number of motifs that the algorithm will try to extract (default is 20). The resulting number of motifs might be lower.
 * :code:`-min_conf`     
    The minimal confidence (chi-square statistics) value. Default is 1000.
 * :code:`-target_chr`   
@@ -79,4 +83,5 @@ Let's consider forward strand of ``contig_1`` contig. The following files are ge
    the all passed 11-mers are unexplained on the first iteration.
 * ``plots_forward_contig_1``
    This folder contains signal distribution plots for each extracted methylation motif.
-
+* ``motif_refine``
+   This folder contains the long motif enrichment results.
