@@ -135,8 +135,8 @@ Let's consider some graphical output provided by the tool:
 .. image:: images/A45_CATG.png
 
 The left column shows the signal shift for all k-mers containing a considered motif (in our case CATG) in a different positions. The right columns shows the distribution of effect sizes 
-collected from all k-mers represented in the considered genome. If the motif is complete, this distribution should have one visible mode different from zero. Here, we can see a clear 
-signal shift and unimodal distribution off effect sizes for NNNNNCATGNNNNNN variant that means that CATG is a complete methylation motif.
+collected from all k-mers represented in the considered genome and match the template on the left plot. If the motif is complete, this distribution should have one visible mode different from zero. Here, we can see a clear 
+signal shift and unimodal distribution of effect sizes for NNNNNCATGNNNNNN variant that means that CATG is a complete methylation motif.
 
 Numbers in the title of left distributions shows 10, 25, 50, 75, and 90 percentiles of the disctribution.
 
@@ -197,7 +197,7 @@ Let's observe these results for NGCAN::
     GCANNNNNNNNTGCNNT	100837.39703402991
     GCANNNNNNNNTGNC	100265.40043701489
 
-Again, here we have a number of variants and corresponding confidence levels (which are fornally just chi-square statistics values). The GCANNNNNCNNTGC variant has the
+Again, here we have a number of variants and corresponding confidence levels (which are formally just chi-square statistics values). The GCANNNNNCNNTGC variant has the
 highest confidence level, but a more important thing that all other variants are quite close to it and generally describe the same pattern with some small deviations.
 So, the top variant being a consensus of this motif list is an actual long methylation site in *N. gonorrhoeae*.
 
@@ -225,7 +225,7 @@ Now, let's check the NGGTGAN results::
     GGTGANNNNNNNNGC	74920.64477911562
 
 Okey, we have quite high confidence value for the top variant. However, TRD2 sequence variants here are not similar to each other. The absence of a clear TRD2 consensus 
-indicates that we should not consider NGGTGAN as a part of a long motif. Actually, it is an individual motif in *N. gonorrhoeae*.
+indicates that we should not consider NGGTGAN as a part of a long motif. Actually, it is a short individual motif in *N. gonorrhoeae*.
 
 
 
@@ -304,5 +304,5 @@ Demo-dataset
 
 The demo-dataset is available on our FTP: `http://download.ripcm.com/snapper_test/ <http://download.ripcm.com/snapper_test/>`_
 
-The demo-dataset includes multi-fast5 files for native *H. pylori* A45 strain (``control`` folder) and *hpy* mutant disrupted in the gene encoding CATG-specific methyltransferase (``mutant`` folder).
+The demo-dataset includes multi-fast5 files for native *H. pylori* A45 strain (``control`` folder) and its *hpy* mutant disrupted in the gene encoding CATG-specific methyltransferase (``mutant`` folder).
 The reference genome is available on GenBank: `GCF_000333835.2 <https://www.ncbi.nlm.nih.gov/assembly/GCF_000333835.2/>`_.
