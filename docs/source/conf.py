@@ -6,8 +6,8 @@ project = 'Snapper'
 copyright = '2022, D.N.Konanov'
 author = 'DNKonanov'
 
-release = '0.3.1'
-version = '0.3.1'
+release = '0.3.2'
+version = '0.3.2'
 
 # -- General configuration
 

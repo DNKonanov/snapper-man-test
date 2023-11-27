@@ -302,7 +302,7 @@ Here, we summurize some motif inference recommendations:
 Demo-dataset
 ------------
 
-The demo-dataset is available on our FTP: `http://download.ripcm.com/snapper_test/ <http://download.ripcm.com/snapper_test/>`_
+The demo-dataset is available on our FTP: `http://download.ripcm.com/snapper_test/ <http://download.ripcm.com/snapper_test/>`_.
 
 The demo-dataset includes multi-fast5 files for native *H. pylori* A45 strain (``control`` folder) and its *hpy* mutant disrupted in the gene encoding CATG-specific methyltransferase (``mutant`` folder).
 The reference genome is available on GenBank: `GCF_000333835.2 <https://www.ncbi.nlm.nih.gov/assembly/GCF_000333835.2/>`_.
