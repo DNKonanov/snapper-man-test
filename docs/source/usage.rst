@@ -86,3 +86,9 @@ Let's consider forward strand of ``contig_1`` contig. The following files are ge
    This folder contains signal distribution plots for each extracted methylation motif.
 * ``motif_refine``
    This folder contains the long motif enrichment results.
+
+Citation
+--------
+
+Dmitry N Konanov, Vladislav V Babenko, Aleksandra M Belova, Arina G Madan, Daria I Boldyreva, Oksana E Glushenko, Ivan O Butenko, Dmitry E Fedorov, Alexander I Manolov, Danil V Krivonos, 
+Vassilii N Lazarev, Vadim M Govorun, Elena N Ilina, `Snapper: high-sensitive detection of methylation motifs based on Oxford Nanopore reads <https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/btad702/7429397>`_, Bioinformatics, 2023

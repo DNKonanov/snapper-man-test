@@ -171,7 +171,7 @@ Let's consider `Neisseria gonorrhoeae <https://trace.ncbi.nlm.nih.gov/Traces/ind
 
 During the analysis, Snapper identified NGCAN and NGGTGAN motifs as probably incomplete. In such cases, the algorithm tries to consider these motifs 
 as TRD1 binding sites and performs an additional local motif enrichment in order to find potential TRD2 sequence. The results are written to ``motif_refine`` folder, 
-where ``long_contexts.fasta`` file contains all genome contexts that seems to bring modification and contain the considered motif, and ``long_motif_variants.tsv`` file
+where ``long_contexts.fasta`` file contains all genome contexts that seem to bring modification and contain the considered motif, and ``long_motif_variants.tsv`` file
 contains the most over-represented long motif variants.
 
 Let's observe these results for NGCAN::
@@ -197,7 +197,7 @@ Let's observe these results for NGCAN::
     GCANNNNNNNNTGCNNT	100837.39703402991
     GCANNNNNNNNTGNC	100265.40043701489
 
-Again, here we have a number of variants and corresponding confidence levels (which are formally just chi-square statistics values). The GCANNNNNCNNTGC variant has the
+Again, here we have a number of variants and corresponding confidence levels (which are formally just chi-square statistics values). The GCANNNNNNNNTGC variant has the
 highest confidence level, but a more important thing that all other variants are quite close to it and generally describe the same pattern with some small deviations.
 So, the top variant being a consensus of this motif list is an actual long methylation site in *N. gonorrhoeae*.
 
@@ -280,7 +280,7 @@ Here, NCCTCCN, NGGNCCN, NGATCN, NCGCGN, RAACTCN, NCTACTN, NTGGCCAN, NCAGAAAN, NC
 a lot of sequences with confidence level lower than 500. If we consider graphical outputs for most these motifs we will not see a significant signal shifts but there is one more thing that helps to 
 ensure that they are not actual motifs. According to REBASE, short methylation motifs 1) do not contain individual non-degenerate bases surrounded by 'N' and 2) should contain at least 4 non-'N' bases.
 Motifs NANGGTN, NCNGGTTN, NGGNCN, NCNTCN, NGANTN, NTNTCN do not satisfy the first rule, while NATAN do not satify the second rule so all these motifs should be removed. NGGATC is an occasionally 
-appered submotif for GATC and should be removed too. GGTGC motif has the lowest confidence level but a stable signal shift in the NNNNNNGGTGCNNNN varant.
+appeared submotif for GATC and should be removed too. GGTGC motif has the lowest confidence level but a stable signal shift in the NNNNNNGGTGCNNNN varant.
 
 .. image:: images/TP_GGTGC.png
 
